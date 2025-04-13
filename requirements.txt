@@ -1,4 +1,9 @@
 streamlit
+numpy
 pandas
-openpyxl
 yahooquery
+yfinance
+matplotlib
+seaborn
+plotly
+openpyxl
