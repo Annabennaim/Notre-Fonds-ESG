@@ -47,10 +47,6 @@ st.subheader("Aperçu des données")
 st.dataframe(df_positions.head())
 
 
-st.subheader("Aperçu des données")
-st.dataframe(df_positions.head())
-
-
 # Nettoyage
 df_clean = df_positions[['Ticker', 'Nom', 'Secteur', 'Lieu', 'Pondération (%)']].dropna()
 
@@ -124,10 +120,7 @@ else:
 st.markdown("<b><u>1ère partie : Analyse globale ESG :</u></b>", unsafe_allow_html=True)
 
 
-df = pd.read_excel(uploaded_file, engine='openpyxl', skiprows=7)
-
-
-tickers = df.iloc[:, 0].dropna().unique().tolist()
+tickers = df_positions.iloc[:, 0].dropna().unique().tolist()
 tickers = [str(t).strip() for t in tickers]
 
 
@@ -187,12 +180,12 @@ def safe_average(lst):
     return sum(clean) / len(clean) if clean else None
 
 
-secteurs = df.iloc[:, 2].dropna().unique()
+secteurs = df_positions.iloc[:, 2].dropna().unique()
 secteurs_scores = []
 
 
 for secteur in secteurs:
-    tickers_du_secteur = df[df.iloc[:, 2] == secteur].iloc[:, 0].dropna()
+    tickers_du_secteur = df_positions[df_positions.iloc[:, 2] == secteur].iloc[:, 0].dropna()
     tickers_du_secteur = [str(t).strip() for t in tickers_du_secteur]
 
 
@@ -403,13 +396,7 @@ else:
     st.warning("Aucun secteur disponible pour l'analyse.")
 
 
-
-
-
-
 # Reconstruction du portefeuille personnalisé
-
-
 
 
 st.markdown("<b><u>3ème partie : Simulation de reconstruction du portefeuille</u></b>", unsafe_allow_html=True)
@@ -446,7 +433,7 @@ if 'entreprises_selectionnees_energie' not in st.session_state:
 # 📋 FORMULAIRE
 with st.form("form_portefeuille"):
   # 1️⃣ Sélection des secteurs
-    secteurs_disponibles = df['Secteur'].dropna().unique().tolist()
+    secteurs_disponibles = df_positions['Secteur'].dropna().unique().tolist()
     secteurs_selectionnes = st.multiselect(
         "Sélectionnez les secteurs que vous souhaitez inclure dans votre portefeuille :",
         secteurs_disponibles,
@@ -468,7 +455,7 @@ with st.form("form_portefeuille"):
 
 
     if secteur_energie:
-        entreprises_energie = df[df['Secteur'] == secteur_energie].iloc[:, 0].dropna().unique().tolist()
+        entreprises_energie = df_positions[df_positions['Secteur'] == secteur_energie].iloc[:, 0].dropna().unique().tolist()
         entreprises_selectionnees_energie = st.multiselect(
             f"Sélectionnez les entreprises à inclure dans le secteur {secteur_energie} :",
             entreprises_energie,
@@ -478,7 +465,7 @@ with st.form("form_portefeuille"):
 
 
     if secteur_materiaux:
-        entreprises_materiaux = df[df['Secteur'] == secteur_materiaux].iloc[:, 0].dropna().unique().tolist()
+        entreprises_materiaux = df_positions[df_positions['Secteur'] == secteur_materiaux].iloc[:, 0].dropna().unique().tolist()
         entreprises_selectionnees_materiaux = st.multiselect(
             f"Sélectionnez les entreprises à inclure dans le secteur {secteur_materiaux} :",
             entreprises_materiaux,
@@ -513,7 +500,7 @@ if submit:
 
 
       # Filtrage final
-        df_personnalise = df[df.iloc[:, 0].isin(entreprises_selectionnees)]
+        df_personnalise = df_positions[df_positions.iloc[:, 0].isin(entreprises_selectionnees)]
 
 
         if df_personnalise.empty:
