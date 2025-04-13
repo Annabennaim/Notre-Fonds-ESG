@@ -189,9 +189,7 @@ for secteur in secteurs:
     tickers_du_secteur = df_positions[df_positions.iloc[:, 2] == secteur].iloc[:, 0].dropna()
     tickers_du_secteur = [str(t).strip() for t in tickers_du_secteur]
 
-
     esg_scores, e_scores, s_scores, g_scores, rendements = [], [], [], [], []
-
 
     for ticker in tickers_du_secteur:
         if ticker in esg_data_dict:
@@ -203,7 +201,25 @@ for secteur in secteurs:
             if d.get("rendement") is not None:
                 rendements.append(d.get("rendement"))
 
+    if esg_scores:
+        # C’est ici que tu ajoutes :
+        score_moyen = safe_average(esg_scores)
 
+        # Ajoute cette partie :
+        if score_moyen is not None:
+            if score_moyen < 20:
+                phrase = "🟢 Ce secteur est globalement très vertueux selon les critères ESG. Il présente des engagements forts sur les enjeux environnementaux, sociaux et de gouvernance."
+            elif score_moyen < 40:
+                phrase = "🟡 Ce secteur est plutôt bien noté, mais quelques axes de progrès restent possibles."
+            elif score_moyen < 60:
+                phrase = "🟠 Ce secteur affiche une performance ESG moyenne. Certains acteurs tirent le score vers le bas."
+            else:
+                phrase = "🔴 Ce secteur est globalement mal noté en ESG. Il fait face à de nombreux défis en matière de durabilité."
+
+        else:
+            phrase = "❔ Données ESG insuffisantes pour établir une tendance."
+
+    
     if esg_scores:
         secteurs_scores.append([
             secteur,
