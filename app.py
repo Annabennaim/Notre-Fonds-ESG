@@ -134,7 +134,8 @@ except Exception as e:
     st.error(f"Erreur lors de la récupération des scores ESG : {e}")
     esg_scores_data = {}
 
-
+t = Ticker(tickers)
+st.write(t.all_modules)  # pour inspecter ce que YahooQuery retourne
 esg_data_dict = {}
 
 
