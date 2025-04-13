@@ -139,19 +139,19 @@ except Exception as e:
     esg_scores_data = {}
 
     # Vérifier chaque ticker et récupérer son score ESG
-        for ticker in tickers_clean:
-            esg_data = get_esg_score(ticker)
-            if esg_data is not None:
-                esg_scores[ticker] = esg_data
-            else:
-                st.warning(f"⚠️ Aucun score ESG récupéré pour {ticker}")
+    for ticker in tickers_clean:
+        esg_data = get_esg_score(ticker)
+        if esg_data is not None:
+            esg_scores[ticker] = esg_data
+        else:
+            st.warning(f"⚠️ Aucun score ESG récupéré pour {ticker}")
         
     # Si aucun score ESG n'a été récupéré
-        if not esg_scores:
-            st.warning("⚠️ Aucun score ESG récupéré pour les tickers disponibles.")
-        else:
-            st.write("Scores ESG récupérés :")
-            st.write(esg_scores)
+    if not esg_scores:
+        st.warning("⚠️ Aucun score ESG récupéré pour les tickers disponibles.")
+    else:
+        st.write("Scores ESG récupérés :")
+        st.write(esg_scores)
 
 
 esg_data_dict = {}
