@@ -9,6 +9,7 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import re
 
 
 st.title("Analyse et Optimisation ESG de notre Fonds ")
