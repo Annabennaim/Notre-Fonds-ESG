@@ -21,6 +21,6 @@ Bienvenue dans l'application "Notre Fonds ESG" ! Ce projet a été conçu pour p
 
 - Git & GitHub pour le versioning
 
-Projet réalisé par Anna Bennaim, Agathe et Arwenn Scharr
+Projet réalisé par Anna Bennaim, Agathe Plouvier et Arwen Scharr
 
 lien pour Streamlit Community Cloud: https://annabennaim-notre-fonds-esg-app-wfmubb.streamlit.app/
