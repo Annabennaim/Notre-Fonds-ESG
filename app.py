@@ -120,7 +120,7 @@ df = pd.read_excel(uploaded_file, engine='openpyxl', skiprows=7)
 
 
 tickers = df.iloc[:, 0].dropna().unique().tolist()
-tickers = [str(t).strip() for t in tickers if isinstance(t, str)]  # Vérifie que c'est une chaîne de caractères
+tickers_valides = [str(t).strip() for t in tickers if isinstance(t, str)]  # Vérifie que c'est une chaîne de caractères
 tickers_clean = [ticker.strip().upper() for ticker in tickers_valides]
 # Filtrer les suffixes comme ":xpar"
 tickers_clean = [re.sub(r':.*', '', ticker) for ticker in tickers_clean]
