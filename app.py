@@ -14,14 +14,18 @@ import plotly.express as px
 st.title("Analyse et Optimisation ESG de notre Fonds ")
 
 st.write("""
-Bienvenue sur notre outil d’analyse ESG.  
+Bienvenue sur notre outil d’analyse ESG.
 Dans ce projet, nous avons choisi de partir d’un fonds d’investissement déjà existant afin d’évaluer sa performance selon des critères environnementaux, sociaux et de gouvernance (ESG).
+Il s'agit du fonds indiciel coté iShares MSCI World SRI UCITS ETF, conçu pour offrir aux investisseurs une exposition aux actions mondiales respectant des critères ESG rigoureux.
 
-L’objectif est double :  
-1. **Mesurer le score ESG moyen du fonds dans son ensemble** pour avoir une première idée de sa performance globale.  
+
+Notre objectif est double :
+1. **Mesurer le score ESG moyen du fonds dans son ensemble** pour avoir une première idée de sa performance globale.
 2. **Analyser le score ESG moyen par secteur d’activité** pour identifier les secteurs les plus vertueux, mais aussi ceux qui pénalisent le score global.
 
-En repérant le ou les secteurs ayant les scores ESG les plus faibles, nous pourrons proposer des ajustements dans la composition du portefeuille afin d’**améliorer son profil ESG** tout en maintenant une diversification cohérente.
+
+Enfin, dans un troisième temps, en repérant le ou les secteurs ayant les scores ESG les plus faibles, nous pourrons proposer des ajustements dans la composition du portefeuille afin d’**améliorer son profil ESG** tout en maintenant une diversification cohérente.
+Par ailleurs, cette analyse nous permettra de challenger les hypothèses du fonds choisi.
 """)
 
 st.markdown("<b><u>1ère partie : Analyse globale de notre fonds :</u></b>", unsafe_allow_html=True)
