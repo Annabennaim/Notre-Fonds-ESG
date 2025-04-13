@@ -124,7 +124,7 @@ else:
 st.markdown("<b><u>1ère partie : Analyse globale ESG :</u></b>", unsafe_allow_html=True)
 
 
-df = pd.read_excel(chemin_complet, engine='openpyxl', skiprows=7)
+df = pd.read_excel(uploaded_file, engine='openpyxl', skiprows=7)
 
 
 tickers = df.iloc[:, 0].dropna().unique().tolist()
