@@ -26,17 +26,17 @@ En repérant le ou les secteurs ayant les scores ESG les plus faibles, nous pour
 
 st.markdown("<b><u>1ère partie : Analyse globale de notre fonds :</u></b>", unsafe_allow_html=True)
 
-# Spécifie le répertoire où se trouve ton fichier
-repertoire = "/Users/annabennaim/Desktop/M1 EIF/Eco verte/"
+# Upload du fichier
+uploaded_file = st.file_uploader("Chargez votre fichier Excel (.xlsm)", type=["xls", "xlsx", "xlsm"])
 
-# Nom du fichier
-nom_fichier = "iShares-MSCI-World-SRI-UCITS-ETF-EUR-Acc_fund.xlsm"
-
-# Construction du chemin complet
-chemin_complet = os.path.join(repertoire, nom_fichier)
-
-# Charger le fichier Excel
-df_positions = pd.read_excel(chemin_complet, engine='openpyxl', skiprows=7)
+if uploaded_file is not None:
+    try:
+        df_positions = pd.read_excel(uploaded_file, engine='openpyxl', skiprows=7)
+        st.success("✅ Fichier chargé avec succès !")
+        st.subheader("Aperçu des données")
+        st.dataframe(df_positions.head())
+    except Exception as e:
+        st.error(f"Erreur lors de la lecture du fichier : {e}")
 
 st.subheader("Aperçu des données")
 st.dataframe(df_positions.head())
