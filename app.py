@@ -126,7 +126,19 @@ tickers_clean = [ticker.strip().upper() for ticker in tickers_valides]
 # Filtrer les suffixes comme ":xpar"
 tickers_clean = [re.sub(r':.*', '', ticker) for ticker in tickers_clean]
 
-# Vérifier chaque ticker et récupérer son score ESG
+
+
+try:
+    @st.cache_data
+    def get_esg_scores(tickers):
+        ticker_data = Ticker(tickers)
+        return ticker_data.esg_scores
+    esg_scores_data = get_esg_scores(tickers)
+except Exception as e:
+    st.error(f"Erreur lors de la récupération des scores ESG : {e}")
+    esg_scores_data = {}
+
+    # Vérifier chaque ticker et récupérer son score ESG
 for ticker in tickers_clean:
     esg_data = get_esg_score(ticker)
     if esg_data is not None:
@@ -140,17 +152,6 @@ if not esg_scores:
 else:
     st.write("Scores ESG récupérés :")
     st.write(esg_scores)
-
-
-try:
-    @st.cache_data
-    def get_esg_scores(tickers):
-        ticker_data = Ticker(tickers)
-        return ticker_data.esg_scores
-    esg_scores_data = get_esg_scores(tickers)
-except Exception as e:
-    st.error(f"Erreur lors de la récupération des scores ESG : {e}")
-    esg_scores_data = {}
 
 
 esg_data_dict = {}
