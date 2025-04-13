@@ -116,7 +116,9 @@ df = pd.read_excel(uploaded_file, engine='openpyxl', skiprows=7)
 
 
 tickers = df.iloc[:, 0].dropna().unique().tolist()
-tickers = [str(t).strip() for t in tickers]
+st.write("Liste des tickers extraits :")
+st.write(tickers)  # Affiche les tickers extraits pour débogage
+tickers = [str(t).strip() for t in tickers if isinstance(t, str)]  # Vérifie que c'est une chaîne de caractères
 
 
 try:
